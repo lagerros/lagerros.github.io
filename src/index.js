@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("back again from vs code!");
+console.log("back again from vs code, with typescript and webpack!!");
 var user_event_1 = require("@testing-library/user-event");
 var searchText = "";
 var emojiOn = false;

@@ -1,4 +1,4 @@
-console.log("back again from vs code!")
+console.log("back again from vs code, with typescript and webpack!!")
 import userEvent from "@testing-library/user-event";
 
 let searchText = "";
