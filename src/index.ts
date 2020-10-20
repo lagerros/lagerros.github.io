@@ -60,3 +60,5 @@ const inputEventListener = async (e: InputEvent) => {
   };
 
   document.addEventListener("input", inputEventListener);
+
+console.log("hmm...")
