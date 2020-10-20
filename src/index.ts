@@ -52,9 +52,10 @@ const inputEventListener = async (e: InputEvent) => {
           return await fetch(main_url, options( query ))
         }
 
-        const haha = request(q).then(r => JSON.stringify(r.json().choices[0].text))
+        const haha = request(q).then(r => r.json())
+        const hehe = JSON.stringify(haha.then(r => r.choices[0].text))
      //   console.log(haha.then( r => console.log(r.choices[0].text)))
-        insertEmoji(e.target as HTMLTextAreaElement, await haha);
+        insertEmoji(e.target as HTMLTextAreaElement, await hehe);
 
     }
   };

@@ -72,7 +72,7 @@ var insertEmoji = function (target, emojiCode) {
     user_event_1.default.type(target, emojiCode);
 };
 var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var request, haha, _a, _b;
+    var request, haha, hehe, _a, _b;
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
@@ -85,11 +85,12 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
                         }
                     });
                 }); };
-                haha = request(q).then(function (r) { return JSON.stringify(r.json().choices[0].text); });
+                haha = request(q).then(function (r) { return r.json(); });
+                hehe = JSON.stringify(haha.then(function (r) { return r.choices[0].text; }));
                 //   console.log(haha.then( r => console.log(r.choices[0].text)))
                 _a = insertEmoji;
                 _b = [e.target];
-                return [4 /*yield*/, haha];
+                return [4 /*yield*/, hehe];
             case 1:
                 //   console.log(haha.then( r => console.log(r.choices[0].text)))
                 _a.apply(void 0, _b.concat([_c.sent()]));
