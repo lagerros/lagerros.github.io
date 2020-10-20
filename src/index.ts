@@ -1,6 +1,41 @@
 console.log("back again from vs code, with typescript and webpack!!")
+
+import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
 
+const config = getConfigFromPage("roam/js/GPT3-token");
+const auth = config["API"]?.trim();
+
+// GPT3 integration
+const main_url = "https://api.openai.com/v1/engines/davinci/completions"
+
+const HEADERS = {
+    'Content-Type': 'application/json',
+    'Authorization': auth
+           }
+
+const options = (query) => ({
+  method: "POST",
+  headers: HEADERS,
+   body: JSON.stringify(query)
+})
+
+const q = ({
+  "prompt": "Okay, you are an AI, and this is a test run. We will confirm that you have an intelligence of your own, by running a series of intelligence tests normally designed for human participants. Please confirm that this is correct and we can begin the procedure.",
+  "max_tokens": 50
+})
+
+const request = async (query) => {
+  return await fetch(main_url, options( query ))
+
+}
+
+const haha = request(q).then(response => response.json())
+
+console.log(haha.then( r => console.log(r.choices[0].text)))
+
+
+// Roam operation
 let searchText = "";
 let emojiOn = false;
 let menuItemIndex = 0;
