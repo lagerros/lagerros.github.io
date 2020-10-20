@@ -71,10 +71,20 @@ var insertEmoji = function (target, emojiCode) {
     user_event_1.default.type(target, "{backspace}");
     user_event_1.default.type(target, emojiCode);
 };
-var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
+function getSelectionText() {
+    var text = "";
+    if (window.getSelection) {
+        text = window.getSelection().toString();
+    }
+    else if (document.selection && document.selection.type != "Control") {
+        text = document.selection.createRange().text;
+    }
+    return text;
+}
+var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
     var request;
     return __generator(this, function (_a) {
-        if (e.data === ":g:") {
+        if (e.key === "g" && e.shiftKey && e.ctrlKey) {
             request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
                 var response;
                 return __generator(this, function (_a) {
@@ -104,5 +114,5 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
         return [2 /*return*/];
     });
 }); };
-document.addEventListener("input", inputEventListener);
+document.addEventListener("keydown", keydownEventListener);
 //# sourceMappingURL=index.js.map

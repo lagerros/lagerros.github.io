@@ -45,8 +45,18 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
     userEvent.type(target, emojiCode);
   };
 
-const inputEventListener = async (e: InputEvent) => {
-    if (e.data === ":g:") {
+function getSelectionText() {
+  var text = "";
+  if (window.getSelection) {
+      text = window.getSelection().toString();
+  } else if (document.selection && document.selection.type != "Control") {
+      text = document.selection.createRange().text;
+  }
+  return text;
+}
+
+const keydownEventListener = async (e: KeyboardEvent) => {
+    if (e.key === "g" && e.shiftKey && e.ctrlKey) {
 
         const request = async query => {
           let response = await fetch(main_url, options( query ))
@@ -65,4 +75,4 @@ const inputEventListener = async (e: InputEvent) => {
     }
   };
 
-  document.addEventListener("input", inputEventListener);
+  document.addEventListener("keydown", keydownEventListener);
