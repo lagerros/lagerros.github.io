@@ -21,7 +21,7 @@ const options = (query) => ({
 })
 
 const q = ({
-  "prompt": "Okay, you are an AI, and this is a test run. We will confirm that you have an intelligence of your own, by running a series of intelligence tests normally designed for human participants. Please confirm that this is correct and we can begin the procedure.",
+  "prompt": "Today, we will learn about tigers -- these fascinating beasts of the great open wild.",
   "max_tokens": 50
 })
 
