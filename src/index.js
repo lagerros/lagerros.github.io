@@ -74,7 +74,7 @@ var insertEmoji = function (target, emojiCode) {
 var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
     var request;
     return __generator(this, function (_a) {
-        if (e.data === ":") {
+        if (e.data === ":g:") {
             request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
                 var response;
                 return __generator(this, function (_a) {

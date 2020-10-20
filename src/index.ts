@@ -46,7 +46,7 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
   };
 
 const inputEventListener = async (e: InputEvent) => {
-    if (e.data === ":") {
+    if (e.data === ":g:") {
 
         const request = async query => {
           let response = await fetch(main_url, options( query ))
