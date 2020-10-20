@@ -35,9 +35,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("back again from vs code, with typescript and webpack!!");
+console.log("new stuff new stuff!!");
+var roam_client_1 = require("roam-client");
 var user_event_1 = require("@testing-library/user-event");
+var config = roam_client_1.getConfigFromPage("roam/js/GPT3-token");
+var auth = (_a = config["API"]) === null || _a === void 0 ? void 0 : _a.trim();
+console.log("auth", auth);
+// GPT3 integration
+var main_url = "https://api.openai.com/v1/engines/davinci/completions";
+var HEADERS = {
+    'Content-Type': 'application/json',
+    'Authorization': auth
+};
+var options = function (query) { return ({
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify(query)
+}); };
+var q = ({
+    "prompt": "Today, we will learn about tigers -- these fascinating beasts of the great open wild.",
+    "max_tokens": 50
+});
+// Roam operation
 var searchText = "";
 var emojiOn = false;
 var menuItemIndex = 0;
@@ -51,9 +72,20 @@ var insertEmoji = function (target, emojiCode) {
     user_event_1.default.type(target, emojiCode);
 };
 var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
+    var request, haha;
     return __generator(this, function (_a) {
         if (e.data === ":") {
             insertEmoji(e.target, "hi there!");
+            request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, fetch(main_url, options(query))];
+                        case 1: return [2 /*return*/, _a.sent()];
+                    }
+                });
+            }); };
+            haha = request(q).then(function (response) { return response.json(); });
+            console.log(haha.then(function (r) { return console.log(r.choices[0].text); }));
         }
         return [2 /*return*/];
     });
