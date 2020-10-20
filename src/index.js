@@ -72,22 +72,30 @@ var insertEmoji = function (target, emojiCode) {
     user_event_1.default.type(target, emojiCode);
 };
 var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var request, haha;
-    return __generator(this, function (_a) {
-        if (e.data === ":") {
-            insertEmoji(e.target, "hi there!");
-            request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, fetch(main_url, options(query))];
-                        case 1: return [2 /*return*/, _a.sent()];
-                    }
-                });
-            }); };
-            haha = request(q).then(function (response) { return response.json(); });
-            console.log(haha.then(function (r) { return console.log(r.choices[0].text); }));
+    var request, haha, _a, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                if (!(e.data === ":")) return [3 /*break*/, 2];
+                request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, fetch(main_url, options(query))];
+                            case 1: return [2 /*return*/, _a.sent()];
+                        }
+                    });
+                }); };
+                haha = request(q).then(function (r) { return JSON.stringify(r.json().choices[0].text); });
+                //   console.log(haha.then( r => console.log(r.choices[0].text)))
+                _a = insertEmoji;
+                _b = [e.target];
+                return [4 /*yield*/, haha];
+            case 1:
+                //   console.log(haha.then( r => console.log(r.choices[0].text)))
+                _a.apply(void 0, _b.concat([_c.sent()]));
+                _c.label = 2;
+            case 2: return [2 /*return*/];
         }
-        return [2 /*return*/];
     });
 }); };
 document.addEventListener("input", inputEventListener);

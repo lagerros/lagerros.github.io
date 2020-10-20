@@ -47,15 +47,15 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
 
 const inputEventListener = async (e: InputEvent) => {
     if (e.data === ":") {
-        insertEmoji(e.target as HTMLTextAreaElement, "hi there!");
+
         const request = async (query) => {
           return await fetch(main_url, options( query ))
-
         }
 
-        const haha = request(q).then(response => response.json())
+        const haha = request(q).then(r => JSON.stringify(r.json().choices[0].text))
+     //   console.log(haha.then( r => console.log(r.choices[0].text)))
+        insertEmoji(e.target as HTMLTextAreaElement, await haha);
 
-        console.log(haha.then( r => console.log(r.choices[0].text)))
     }
   };
 
