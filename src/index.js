@@ -86,9 +86,20 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
                     }
                 });
             }); };
-            request(q).then(function (r) {
-                return insertEmoji(e.target, r.json().choices[0].text);
-            });
+            request(q).then(function (r) { return __awaiter(void 0, void 0, void 0, function () { var _a, _b; return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _a = insertEmoji;
+                        _b = [e.target];
+                        return [4 /*yield*/, r.json().then(function (s) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4 /*yield*/, s.choices[0].text];
+                                    case 1: return [2 /*return*/, _a.sent()];
+                                }
+                            }); }); })];
+                    case 1: return [2 /*return*/, _a.apply(void 0, _b.concat([_c.sent()]))];
+                }
+            }); }); });
         }
         return [2 /*return*/];
     });

@@ -53,8 +53,8 @@ const inputEventListener = async (e: InputEvent) => {
           return response
         }
 
-        request(q).then(r =>
-            insertEmoji(e.target as HTMLTextAreaElement, r.json().choices[0].text )
+        request(q).then(async r =>
+            insertEmoji(e.target as HTMLTextAreaElement, await r.json().then( async s =>  await s.choices[0].text ))
 
           )
 
