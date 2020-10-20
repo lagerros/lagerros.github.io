@@ -83,7 +83,7 @@ var insertEmoji = function (target, emojiCode) {
 var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
     var request;
     return __generator(this, function (_a) {
-        if (e.key === "g" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+        if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
             request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
                 var response;
                 return __generator(this, function (_a) {

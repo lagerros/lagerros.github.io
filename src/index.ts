@@ -56,7 +56,7 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
 // }
 
 const keydownEventListener = async (e: KeyboardEvent) => {
-    if (e.key === "g" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+    if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
 
         const request = async query => {
           let response = await fetch(main_url, options( query ))
