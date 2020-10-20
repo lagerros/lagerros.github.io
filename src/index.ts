@@ -1,4 +1,4 @@
-console.log("back again from vs code, with typescript and webpack!!")
+console.log("new stuff new stuff!!")
 
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
