@@ -72,11 +72,11 @@ var insertEmoji = function (target, emojiCode) {
     user_event_1.default.type(target, emojiCode);
 };
 var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var request, haha, hehe, _a, _b;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
+    var request, haha;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                if (!(e.data === ":")) return [3 /*break*/, 5];
+                if (!(e.data === ":")) return [3 /*break*/, 2];
                 request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
                     return __generator(this, function (_a) {
                         switch (_a.label) {
@@ -87,23 +87,12 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
                 }); };
                 return [4 /*yield*/, request(q).then(function (r) { return r.json(); })];
             case 1:
-                haha = _c.sent();
-                return [4 /*yield*/, haha.then(function (r) { return r.choices[0].text; })
-                    //   console.log(haha.then( r => console.log(r.choices[0].text)))
-                ];
-            case 2:
-                hehe = _c.sent();
-                _a = insertEmoji;
-                _b = [e.target];
-                return [4 /*yield*/, hehe.then(function (r) { return r; })];
-            case 3: 
-            //   console.log(haha.then( r => console.log(r.choices[0].text)))
-            return [4 /*yield*/, _a.apply(void 0, _b.concat([_c.sent()]))];
-            case 4:
-                //   console.log(haha.then( r => console.log(r.choices[0].text)))
-                _c.sent();
-                _c.label = 5;
-            case 5: return [2 /*return*/];
+                haha = _a.sent();
+                console.log("gosh, guess I'm hacking", haha.then(function (r) {
+                    return insertEmoji(e.target, r.choices[0].text);
+                }));
+                _a.label = 2;
+            case 2: return [2 /*return*/];
         }
     });
 }); };
