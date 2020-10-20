@@ -1,4 +1,4 @@
-console.log("new stuff new stuff!!")
+console.log("j stuff!")
 
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
