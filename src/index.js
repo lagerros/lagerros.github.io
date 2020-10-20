@@ -76,7 +76,7 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
     return __generator(this, function (_c) {
         switch (_c.label) {
             case 0:
-                if (!(e.data === ":")) return [3 /*break*/, 2];
+                if (!(e.data === ":")) return [3 /*break*/, 4];
                 request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
                     return __generator(this, function (_a) {
                         switch (_a.label) {
@@ -86,16 +86,22 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
                     });
                 }); };
                 haha = request(q).then(function (r) { return r.json(); });
-                hehe = JSON.stringify(haha.then(function (r) { return r.choices[0].text; }));
-                //   console.log(haha.then( r => console.log(r.choices[0].text)))
+                return [4 /*yield*/, JSON.stringify(haha.then(function (r) { return r.choices[0].text; }))
+                    //   console.log(haha.then( r => console.log(r.choices[0].text)))
+                ];
+            case 1:
+                hehe = _c.sent();
                 _a = insertEmoji;
                 _b = [e.target];
                 return [4 /*yield*/, hehe];
-            case 1:
+            case 2: 
+            //   console.log(haha.then( r => console.log(r.choices[0].text)))
+            return [4 /*yield*/, _a.apply(void 0, _b.concat([_c.sent()]))];
+            case 3:
                 //   console.log(haha.then( r => console.log(r.choices[0].text)))
-                _a.apply(void 0, _b.concat([_c.sent()]));
-                _c.label = 2;
-            case 2: return [2 /*return*/];
+                _c.sent();
+                _c.label = 4;
+            case 4: return [2 /*return*/];
         }
     });
 }); };
