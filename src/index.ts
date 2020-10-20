@@ -6,6 +6,8 @@ import userEvent from "@testing-library/user-event";
 const config = getConfigFromPage("roam/js/GPT3-token");
 const auth = config["API"]?.trim();
 
+console.log("auth", auth)
+
 // GPT3 integration
 const main_url = "https://api.openai.com/v1/engines/davinci/completions"
 
@@ -24,16 +26,6 @@ const q = ({
   "prompt": "Today, we will learn about tigers -- these fascinating beasts of the great open wild.",
   "max_tokens": 50
 })
-
-const request = async (query) => {
-  return await fetch(main_url, options( query ))
-
-}
-
-const haha = request(q).then(response => response.json())
-
-console.log(haha.then( r => console.log(r.choices[0].text)))
-
 
 // Roam operation
 let searchText = "";
@@ -56,6 +48,14 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
 const inputEventListener = async (e: InputEvent) => {
     if (e.data === ":") {
         insertEmoji(e.target as HTMLTextAreaElement, "hi there!");
+        const request = async (query) => {
+          return await fetch(main_url, options( query ))
+
+        }
+
+        const haha = request(q).then(response => response.json())
+
+        console.log(haha.then( r => console.log(r.choices[0].text)))
     }
   };
 
