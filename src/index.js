@@ -72,28 +72,25 @@ var insertEmoji = function (target, emojiCode) {
     user_event_1.default.type(target, emojiCode);
 };
 var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var request, haha;
+    var request;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                if (!(e.data === ":")) return [3 /*break*/, 2];
-                request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, fetch(main_url, options(query))];
-                            case 1: return [2 /*return*/, _a.sent()];
-                        }
-                    });
-                }); };
-                return [4 /*yield*/, request(q).then(function (r) { return r.json(); })];
-            case 1:
-                haha = _a.sent();
-                console.log("gosh, guess I'm hacking", haha.then(function (r) {
-                    return insertEmoji(e.target, r.choices[0].text);
-                }));
-                _a.label = 2;
-            case 2: return [2 /*return*/];
+        if (e.data === ":") {
+            request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
+                var response;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, fetch(main_url, options(query))];
+                        case 1:
+                            response = _a.sent();
+                            return [2 /*return*/, response];
+                    }
+                });
+            }); };
+            request(q).then(function (r) {
+                return insertEmoji(e.target, r.json().choices[0].text);
+            });
         }
+        return [2 /*return*/];
     });
 }); };
 document.addEventListener("input", inputEventListener);

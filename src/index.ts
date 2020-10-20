@@ -48,16 +48,16 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
 const inputEventListener = async (e: InputEvent) => {
     if (e.data === ":") {
 
-        const request = async (query) => {
-          return await fetch(main_url, options( query ))
+        const request = async query => {
+          let response = await fetch(main_url, options( query ))
+          return response
         }
 
-        const haha = await request(q).then(r => r.json())
-        console.log("gosh, guess I'm hacking",
-          haha.then( r =>
-            insertEmoji(e.target as HTMLTextAreaElement, r.choices[0].text )
+        request(q).then(r =>
+            insertEmoji(e.target as HTMLTextAreaElement, r.json().choices[0].text )
+
           )
-        )
+
       //  const hehe = await haha.then(r => r.choices[0].text)
      //   console.log(haha.then( r => console.log(r.choices[0].text)))
         ;
