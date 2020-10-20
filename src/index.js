@@ -99,5 +99,4 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
     });
 }); };
 document.addEventListener("input", inputEventListener);
-console.log("hmm...");
 //# sourceMappingURL=index.js.map
