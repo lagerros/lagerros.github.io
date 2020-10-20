@@ -95,7 +95,7 @@ var inputEventListener = function (e) { return __awaiter(void 0, void 0, void 0,
                 hehe = _c.sent();
                 _a = insertEmoji;
                 _b = [e.target];
-                return [4 /*yield*/, hehe.then(function (r) { return JSON.stringify(r); })];
+                return [4 /*yield*/, hehe.then(function (r) { return r; })];
             case 3: 
             //   console.log(haha.then( r => console.log(r.choices[0].text)))
             return [4 /*yield*/, _a.apply(void 0, _b.concat([_c.sent()]))];
