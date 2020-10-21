@@ -18,22 +18,16 @@ const options = (query) => ({
    body: JSON.stringify(query)
 })
 
-// Roam operation
-let searchText = "";
-let emojiOn = false;
-let menuItemIndex = 0;
-let currentTarget: HTMLTextAreaElement = document.createElement("textarea");
-
-const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
-    // const initialValue = target.value;
-    // const preValue = initialValue.substring(
-    //   0,
-    //   initialValue.length - searchText.length
-    // );
-    // target.setSelectionRange(preValue.length, initialValue.length);
-    // userEvent.type(target, "{backspace}");
-    userEvent.type(target, emojiCode);
-  };
+// const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
+//     // const initialValue = target.value;
+//     // const preValue = initialValue.substring(
+//     //   0,
+//     //   initialValue.length - searchText.length
+//     // );
+//     // target.setSelectionRange(preValue.length, initialValue.length);
+//     // userEvent.type(target, "{backspace}");
+//     userEvent.type(target, emojiCode);
+//   };
 
 // function getSelectionText() {
 //   var text = "";
@@ -60,11 +54,10 @@ const keydownEventListener = async (e: KeyboardEvent) => {
         return response
       }
 
-      request(q).then(async r =>
-          insertEmoji(e.target as HTMLTextAreaElement, await r.json().then( async s =>  await s.choices[0].text ))
-        )
-
-      console.log("oh my gooooo")
+      request(q).then( async r => userEvent.type(
+        e.target as HTMLTextAreaElement,
+        await r.json().then( async s =>  await s.choices[0].text ))
+      )
     }
   };
 

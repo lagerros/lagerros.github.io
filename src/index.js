@@ -52,21 +52,16 @@ var options = function (query) { return ({
     headers: HEADERS,
     body: JSON.stringify(query)
 }); };
-// Roam operation
-var searchText = "";
-var emojiOn = false;
-var menuItemIndex = 0;
-var currentTarget = document.createElement("textarea");
-var insertEmoji = function (target, emojiCode) {
-    // const initialValue = target.value;
-    // const preValue = initialValue.substring(
-    //   0,
-    //   initialValue.length - searchText.length
-    // );
-    // target.setSelectionRange(preValue.length, initialValue.length);
-    // userEvent.type(target, "{backspace}");
-    user_event_1.default.type(target, emojiCode);
-};
+// const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
+//     // const initialValue = target.value;
+//     // const preValue = initialValue.substring(
+//     //   0,
+//     //   initialValue.length - searchText.length
+//     // );
+//     // target.setSelectionRange(preValue.length, initialValue.length);
+//     // userEvent.type(target, "{backspace}");
+//     userEvent.type(target, emojiCode);
+//   };
 // function getSelectionText() {
 //   var text = "";
 //   if (window.getSelection) {
@@ -96,21 +91,23 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
                     }
                 });
             }); };
-            request(q).then(function (r) { return __awaiter(void 0, void 0, void 0, function () { var _a, _b; return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _a = insertEmoji;
-                        _b = [e.target];
-                        return [4 /*yield*/, r.json().then(function (s) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0: return [4 /*yield*/, s.choices[0].text];
-                                    case 1: return [2 /*return*/, _a.sent()];
-                                }
-                            }); }); })];
-                    case 1: return [2 /*return*/, _a.apply(void 0, _b.concat([_c.sent()]))];
-                }
-            }); }); });
-            console.log("oh my gooooo");
+            request(q).then(function (r) { return __awaiter(void 0, void 0, void 0, function () {
+                var _a, _b, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0:
+                            _b = (_a = user_event_1.default).type;
+                            _c = [e.target];
+                            return [4 /*yield*/, r.json().then(function (s) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, s.choices[0].text];
+                                        case 1: return [2 /*return*/, _a.sent()];
+                                    }
+                                }); }); })];
+                        case 1: return [2 /*return*/, _b.apply(_a, _c.concat([_d.sent()]))];
+                    }
+                });
+            }); });
         }
         return [2 /*return*/];
     });
