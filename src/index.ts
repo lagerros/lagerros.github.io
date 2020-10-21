@@ -1,4 +1,4 @@
-console.log("and, a new test2")
+console.log("and, a new test33333")
 
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
