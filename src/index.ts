@@ -3,6 +3,8 @@ console.log("man if this works it will be great!")
 
 console.log("here's a new thing!")
 
+console.log("wtf?")
+
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
 
