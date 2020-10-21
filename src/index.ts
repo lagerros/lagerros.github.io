@@ -1,5 +1,7 @@
 console.log("man if this works it will be great!")
 
+console.log("why is it still outputting j stuff??")
+
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
 
