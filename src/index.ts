@@ -1,12 +1,4 @@
-console.log("man if this works it will be great!")
-
-
-console.log("here's a new thing!")
-
-console.log("wtf?")
-
-console.log("wiki")
-console.log("learning git")
+console.log("and, a new test")
 
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
