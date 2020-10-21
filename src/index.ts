@@ -22,10 +22,7 @@ const options = (query) => ({
    body: JSON.stringify(query)
 })
 
-const q = ({
-  "prompt": "Today, we will learn about tigers -- these fascinating beasts of the great open wild.",
-  "max_tokens": 50
-})
+
 
 // Roam operation
 let searchText = "";
@@ -58,19 +55,25 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
 const keydownEventListener = async (e: KeyboardEvent) => {
     if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
 
-        const request = async query => {
-          let response = await fetch(main_url, options( query ))
-          return response
-        }
+      const prompt = document.activeElement.value
 
-        request(q).then(async r =>
-            insertEmoji(e.target as HTMLTextAreaElement, await r.json().then( async s =>  await s.choices[0].text ))
+      const q = ({
+        "prompt": prompt,
+        "max_tokens": 50
+      })
 
-          )
+      const request = async query => {
+        let response = await fetch(main_url, options( query ))
+        return response
+      }
 
-      //  const hehe = await haha.then(r => r.choices[0].text)
-     //   console.log(haha.then( r => console.log(r.choices[0].text)))
-        ;
+      request(q).then(async r =>
+          insertEmoji(e.target as HTMLTextAreaElement, await r.json().then( async s =>  await s.choices[0].text ))
+
+        )
+
+
+      console.log("oh my gooooo")
 
     }
   };

@@ -54,10 +54,6 @@ var options = function (query) { return ({
     headers: HEADERS,
     body: JSON.stringify(query)
 }); };
-var q = ({
-    "prompt": "Today, we will learn about tigers -- these fascinating beasts of the great open wild.",
-    "max_tokens": 50
-});
 // Roam operation
 var searchText = "";
 var emojiOn = false;
@@ -81,9 +77,14 @@ var insertEmoji = function (target, emojiCode) {
 //   return text;
 // }
 var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var request;
+    var prompt_1, q, request;
     return __generator(this, function (_a) {
         if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+            prompt_1 = document.activeElement.value;
+            q = ({
+                "prompt": prompt_1,
+                "max_tokens": 50
+            });
             request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
                 var response;
                 return __generator(this, function (_a) {
@@ -109,6 +110,7 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
                     case 1: return [2 /*return*/, _a.apply(void 0, _b.concat([_c.sent()]))];
                 }
             }); }); });
+            console.log("oh my gooooo");
         }
         return [2 /*return*/];
     });
