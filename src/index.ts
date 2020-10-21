@@ -1,4 +1,4 @@
-console.log("and, a new test33333")
+console.log("come ooon, recompile!")
 
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
@@ -55,7 +55,7 @@ const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
 const keydownEventListener = async (e: KeyboardEvent) => {
     if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
 
-      const prompt = document.activeElement.value
+      const prompt = (<HTMLTextAreaElement>document.activeElement).value
 
       const q = ({
         "prompt": prompt,
@@ -69,12 +69,9 @@ const keydownEventListener = async (e: KeyboardEvent) => {
 
       request(q).then(async r =>
           insertEmoji(e.target as HTMLTextAreaElement, await r.json().then( async s =>  await s.choices[0].text ))
-
         )
 
-
       console.log("oh my gooooo")
-
     }
   };
 
