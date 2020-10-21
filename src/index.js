@@ -37,7 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("come ooon, recompile!");
+console.log("why would it be >50mb? something's wrong here...");
+console.log("hmmmmmmmmm");
 var roam_client_1 = require("roam-client");
 var user_event_1 = require("@testing-library/user-event");
 var config = roam_client_1.getConfigFromPage("roam/js/GPT3-token");

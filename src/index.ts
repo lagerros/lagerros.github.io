@@ -1,4 +1,6 @@
-console.log("come ooon, recompile!")
+console.log("why would it be >50mb? something's wrong here...")
+
+console.log("hmmmmmmmmm")
 
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
