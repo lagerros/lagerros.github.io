@@ -52,27 +52,20 @@ var options = function (query) { return ({
     headers: HEADERS,
     body: JSON.stringify(query)
 }); };
-// const insertEmoji = (target: HTMLTextAreaElement, emojiCode: string) => {
-//     // const initialValue = target.value;
-//     // const preValue = initialValue.substring(
-//     //   0,
-//     //   initialValue.length - searchText.length
-//     // );
-//     // target.setSelectionRange(preValue.length, initialValue.length);
-//     // userEvent.type(target, "{backspace}");
-//     userEvent.type(target, emojiCode);
-//   };
-// function getSelectionText() {
-//   var text = "";
-//   if (window.getSelection) {
-//       text = window.getSelection().toString();
-//   } else if (document.selection && document.selection.type != "Control") {
-//       text = document.selection.createRange().text;
-//   }
-//   return text;
-// }
+var request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
+    var response;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, fetch(main_url, options(query))];
+            case 1:
+                response = _a.sent();
+                return [2 /*return*/, response];
+        }
+    });
+}); };
+// Roam integration
 var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var prompt_1, q, request;
+    var prompt_1, q;
     return __generator(this, function (_a) {
         if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
             prompt_1 = document.activeElement.value;
@@ -80,17 +73,6 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
                 "prompt": prompt_1,
                 "max_tokens": 50
             });
-            request = function (query) { return __awaiter(void 0, void 0, void 0, function () {
-                var response;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, fetch(main_url, options(query))];
-                        case 1:
-                            response = _a.sent();
-                            return [2 /*return*/, response];
-                    }
-                });
-            }); };
             request(q).then(function (r) { return __awaiter(void 0, void 0, void 0, function () {
                 var _a, _b, _c;
                 return __generator(this, function (_d) {
