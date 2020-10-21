@@ -37,13 +37,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-console.log("3344 why would it be >50mb? something's wrong here...");
-console.log("hmmmmmmmmm");
 var roam_client_1 = require("roam-client");
 var user_event_1 = require("@testing-library/user-event");
 var config = roam_client_1.getConfigFromPage("roam/js/GPT3-token");
 var auth = (_a = config["API"]) === null || _a === void 0 ? void 0 : _a.trim();
-console.log("auth", auth);
 // GPT3 integration
 var main_url = "https://api.openai.com/v1/engines/davinci/completions";
 var HEADERS = {
@@ -61,11 +58,13 @@ var emojiOn = false;
 var menuItemIndex = 0;
 var currentTarget = document.createElement("textarea");
 var insertEmoji = function (target, emojiCode) {
-    console.log("this guy is inside insertEmoji");
-    var initialValue = target.value;
-    var preValue = initialValue.substring(0, initialValue.length - searchText.length);
-    target.setSelectionRange(preValue.length, initialValue.length);
-    user_event_1.default.type(target, "{backspace}");
+    // const initialValue = target.value;
+    // const preValue = initialValue.substring(
+    //   0,
+    //   initialValue.length - searchText.length
+    // );
+    // target.setSelectionRange(preValue.length, initialValue.length);
+    // userEvent.type(target, "{backspace}");
     user_event_1.default.type(target, emojiCode);
 };
 // function getSelectionText() {
