@@ -5,6 +5,8 @@ console.log("here's a new thing!")
 
 console.log("wtf?")
 
+console.log("wiki")
+
 import {getConfigFromPage} from "roam-client";
 import userEvent from "@testing-library/user-event";
 

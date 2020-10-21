@@ -40,6 +40,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 console.log("man if this works it will be great!");
 console.log("here's a new thing!");
 console.log("wtf?");
+console.log("wiki");
 var roam_client_1 = require("roam-client");
 var user_event_1 = require("@testing-library/user-event");
 var config = roam_client_1.getConfigFromPage("roam/js/GPT3-token");
