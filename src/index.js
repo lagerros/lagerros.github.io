@@ -49,7 +49,7 @@ const semSearch = async (documents, query) => {
         await r.json() )
 
     const response = await r
-    console.log(response)
+    console.log(await response)
 
     const data = response.data
 
