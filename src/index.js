@@ -94,7 +94,7 @@ const keydownEventListener = async (e) => {
 };
 
 const autoTagListener = async (e) => {
-  if (e.shiftKey && e.ctrlKey && !(e.key === "G") && document.activeElement.tagName === "TEXTAREA") {
+  if (e.shiftKey && e.ctrlKey && e.key === "T" && document.activeElement.tagName === "TEXTAREA") {
 
     console.log("update!!")
 
