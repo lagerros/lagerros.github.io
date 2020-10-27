@@ -24,7 +24,7 @@ const request = async query => {
 }
 
 // This is really ugly and probably breaks a lot of stuff! #TODO
-// let window: any
+let window: any
 
 // const getCurrContext = () => {
 //   const currBlockId = document.activeElement.id.slice(-9)

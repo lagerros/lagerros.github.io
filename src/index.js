@@ -64,7 +64,7 @@ var request = function (query) { return __awaiter(void 0, void 0, void 0, functi
     });
 }); };
 // This is really ugly and probably breaks a lot of stuff! #TODO
-// let window: any
+var window;
 // const getCurrContext = () => {
 //   const currBlockId = document.activeElement.id.slice(-9)
 //   const currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId)
