@@ -86,6 +86,7 @@ const autoTagListener = async (e: KeyboardEvent) => {
     console.log("um is this even working?")
 
     const tags:string[] = getAllTags()
+    console.log(tags)
     const context:string = getCurrContext()
     const data = await semSearch(tags, context)
     console.log(await data)

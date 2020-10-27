@@ -146,6 +146,7 @@ var autoTagListener = function (e) { return __awaiter(void 0, void 0, void 0, fu
                 if (!(e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA")) return [3 /*break*/, 3];
                 console.log("um is this even working?");
                 tags_1 = getAllTags();
+                console.log(tags_1);
                 context = getCurrContext();
                 return [4 /*yield*/, semSearch(tags_1, context)];
             case 1:
