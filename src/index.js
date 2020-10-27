@@ -64,12 +64,12 @@ var request = function (query) { return __awaiter(void 0, void 0, void 0, functi
     });
 }); };
 // This is really ugly and probably breaks a lot of stuff! #TODO
-var window;
-var getCurrContext = function () {
-    var currBlockId = document.activeElement.id.slice(-9);
-    var currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId);
-    return currContext[0][0].string;
-};
+// let window: any
+// const getCurrContext = () => {
+//   const currBlockId = document.activeElement.id.slice(-9)
+//   const currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId)
+//   return currContext[0][0].string
+// }
 var getAllTags = function () {
     var tagPages = window.roamAlphaAPI.q('[ :find (pull ?e [*]) :where [?e :node/title] ] ');
     var tags = tagPages.map(function (page) { return page[0].title; });
@@ -139,29 +139,24 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
     });
 }); };
 var autoTagListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var tags_1, context, data, _a, _b, sortedTags, topTags, tagString;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
-            case 0:
-                if (!(e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA")) return [3 /*break*/, 3];
-                console.log("update!!");
-                tags_1 = getAllTags();
-                console.log(tags_1);
-                context = getCurrContext();
-                return [4 /*yield*/, semSearch(tags_1, context)];
-            case 1:
-                data = _c.sent();
-                _b = (_a = console).log;
-                return [4 /*yield*/, data];
-            case 2:
-                _b.apply(_a, [_c.sent()]);
-                sortedTags = data.sort(function (a, b) { return a.score - b.score; });
-                topTags = sortedTags.slice(-3).map(function (obj) { return tags_1[obj.document]; });
-                tagString = topTags.map(function (tag) { return formatTag(tag); }).join(" ");
-                user_event_1.default.type(e.target, tagString);
-                _c.label = 3;
-            case 3: return [2 /*return*/];
+    var tags;
+    return __generator(this, function (_a) {
+        if (e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+            console.log("update!!");
+            tags = getAllTags();
+            console.log(tags);
+            // const context:string = getCurrContext()
+            // const data = await semSearch(tags, context)
+            // console.log(await data)
+            // const sortedTags = data.sort( (a, b) => a.score - b.score )
+            // const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
+            // const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
+            // userEvent.type(
+            //   e.target as HTMLTextAreaElement,
+            //   tagString
+            // )
         }
+        return [2 /*return*/];
     });
 }); };
 document.addEventListener("keydown", keydownEventListener);

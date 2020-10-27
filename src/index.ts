@@ -24,16 +24,16 @@ const request = async query => {
 }
 
 // This is really ugly and probably breaks a lot of stuff! #TODO
-let window: any
+// let window: any
 
-const getCurrContext = () => {
-  const currBlockId = document.activeElement.id.slice(-9)
-  const currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId)
-  return currContext[0][0].string
-}
+// const getCurrContext = () => {
+//   const currBlockId = document.activeElement.id.slice(-9)
+//   const currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId)
+//   return currContext[0][0].string
+// }
 
 const getAllTags = () => {
-  const tagPages = (<Window>window).roamAlphaAPI.q('[ :find (pull ?e [*]) :where [?e :node/title] ] ')
+  const tagPages = window.roamAlphaAPI.q('[ :find (pull ?e [*]) :where [?e :node/title] ] ')
   const tags = tagPages.map( page => page[0].title)
   return tags
 }
@@ -87,16 +87,16 @@ const autoTagListener = async (e: KeyboardEvent) => {
 
     const tags:string[] = getAllTags()
     console.log(tags)
-    const context:string = getCurrContext()
-    const data = await semSearch(tags, context)
-    console.log(await data)
-    const sortedTags = data.sort( (a, b) => a.score - b.score )
-    const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
-    const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
-    userEvent.type(
-      e.target as HTMLTextAreaElement,
-      tagString
-    )
+    // const context:string = getCurrContext()
+    // const data = await semSearch(tags, context)
+    // console.log(await data)
+    // const sortedTags = data.sort( (a, b) => a.score - b.score )
+    // const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
+    // const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
+    // userEvent.type(
+    //   e.target as HTMLTextAreaElement,
+    //   tagString
+    // )
   }
 };
 
