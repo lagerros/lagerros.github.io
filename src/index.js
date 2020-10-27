@@ -139,23 +139,26 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
     });
 }); };
 var autoTagListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
+    var tags_1, context, data, sortedTags, topTags, tagString;
     return __generator(this, function (_a) {
-        if (e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
-            console.log("um is this even working?");
-            // const tags:string[] = getAllTags()
-            // const context:string = getCurrContext()
-            // const data = await semSearch(tags, context)
-            // const sortedTags = data.sort( (a, b) => a.score - b.score )
-            // const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
-            // const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
-            // userEvent.type(
-            //   e.target as HTMLTextAreaElement,
-            //   tagString
-            // )
+        switch (_a.label) {
+            case 0:
+                if (!(e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA")) return [3 /*break*/, 2];
+                console.log("um is this even working?");
+                tags_1 = getAllTags();
+                context = getCurrContext();
+                return [4 /*yield*/, semSearch(tags_1, context)];
+            case 1:
+                data = _a.sent();
+                sortedTags = data.sort(function (a, b) { return a.score - b.score; });
+                topTags = sortedTags.slice(-3).map(function (obj) { return tags_1[obj.document]; });
+                tagString = topTags.map(function (tag) { return formatTag(tag); }).join(" ");
+                user_event_1.default.type(e.target, tagString);
+                _a.label = 2;
+            case 2: return [2 /*return*/];
         }
-        return [2 /*return*/];
     });
 }); };
 document.addEventListener("keydown", keydownEventListener);
-document.addEventListener("autoTag", autoTagListener);
+document.addEventListener("keydown", autoTagListener);
 //# sourceMappingURL=index.js.map
