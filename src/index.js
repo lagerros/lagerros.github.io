@@ -5,7 +5,9 @@ const config = getConfigFromPage("roam/js/GPT3-token");
 const auth = config["API"]?.trim();
 
 // GPT3 integration
-const main_url = "https://api.openai.com/v1/engines/davinci/completions"
+const completion_url = "https://api.openai.com/v1/engines/davinci/completions"
+const search_url = "https://api.openai.com/v1/engines/davinci/search"
+
 
 const HEADERS = {
     'Content-Type': 'application/json',
@@ -18,10 +20,17 @@ const options = (query) => ({
    body: JSON.stringify(query)
 })
 
-const request = async query => {
-  let response = await fetch(main_url, options( query ))
+// TODO: gah fix this
+
+const requestC = async query => {
+  let response = await fetch(completion_url, options( query ))
   return response
 }
+
+const requestS = async query => {
+    let response = await fetch(search_url, options( query ))
+    return response
+  }
 
 // This is really ugly and probably breaks a lot of stuff! #TODO
 // let window: any
@@ -45,7 +54,7 @@ const semSearch = async (documents, query) => {
         "query": query
     })
 
-    const r = request(params).then( async r =>
+    const r = requestS(params).then( async r =>
         await r.json() )
 
     const response = await r
@@ -77,7 +86,7 @@ const keydownEventListener = async (e) => {
       "max_tokens": 50
     })
 
-    request(q).then( async r => userEvent.type(
+    requestC(q).then( async r => userEvent.type(
       e.target,
       await r.json().then( async s =>  await s.choices[0].text ))
     )
