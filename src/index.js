@@ -93,6 +93,7 @@ const autoTagListener = async (e) => {
     const tags = getAllTags()
     console.log(tags)
     const context = await getCurrContext()
+    console.log(context)
     const data = await semSearch(tags, context)
     console.log(await data)
     const sortedTags = data.sort( (a, b) => a.score - b.score )
