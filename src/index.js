@@ -26,9 +26,9 @@ const request = async query => {
 // This is really ugly and probably breaks a lot of stuff! #TODO
 // let window: any
 
-const getCurrContext = () => {
+const getCurrContext = async () => {
   const currBlockId = document.activeElement.id.slice(-9)
-  const currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId)
+  const currContext = await window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId)
   return currContext[0][0].string
 }
 
@@ -62,7 +62,7 @@ const complete = async (prompt) => {
 }
 
 const formatTag = s => {
-  const tag = / /.test(s) ? "[["+s+"]]" : "#"+s
+  const tag = / /.test(s) ? "#[["+s+"]]" : "#"+s
   return tag
 }
 
@@ -92,7 +92,7 @@ const autoTagListener = async (e) => {
 
     const tags = getAllTags()
     console.log(tags)
-    const context = getCurrContext()
+    const context = await getCurrContext()
     const data = await semSearch(tags, context)
     console.log(await data)
     const sortedTags = data.sort( (a, b) => a.score - b.score )
