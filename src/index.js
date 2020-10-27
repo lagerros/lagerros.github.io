@@ -40,21 +40,20 @@ const getAllTags = () => {
 
 
 const semSearch = async (documents, query) => {
-  const params = ({
-    "documents": documents,
-    "query": query
-  })
+    const params = ({
+        "documents": documents,
+        "query": query
+    })
 
-  const r = request(params).then( async r =>
-      await r.json())
+    const r = request(params).then( async r =>
+        await r.json() )
 
     const response = await r
+    console.log(response)
 
+    const data = response.data
 
-
-  const data = response.data
-
-  return data
+    return data
 }
 
 const complete = async (prompt) => {
