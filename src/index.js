@@ -139,23 +139,27 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
     });
 }); };
 var autoTagListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
-    var tags_1, context, data, sortedTags, topTags, tagString;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var tags_1, context, data, _a, _b, sortedTags, topTags, tagString;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                if (!(e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA")) return [3 /*break*/, 2];
+                if (!(e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA")) return [3 /*break*/, 3];
                 console.log("um is this even working?");
                 tags_1 = getAllTags();
                 context = getCurrContext();
                 return [4 /*yield*/, semSearch(tags_1, context)];
             case 1:
-                data = _a.sent();
+                data = _c.sent();
+                _b = (_a = console).log;
+                return [4 /*yield*/, data];
+            case 2:
+                _b.apply(_a, [_c.sent()]);
                 sortedTags = data.sort(function (a, b) { return a.score - b.score; });
                 topTags = sortedTags.slice(-3).map(function (obj) { return tags_1[obj.document]; });
                 tagString = topTags.map(function (tag) { return formatTag(tag); }).join(" ");
                 user_event_1.default.type(e.target, tagString);
-                _a.label = 2;
-            case 2: return [2 /*return*/];
+                _c.label = 3;
+            case 3: return [2 /*return*/];
         }
     });
 }); };
