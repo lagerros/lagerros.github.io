@@ -63,6 +63,49 @@ var request = function (query) { return __awaiter(void 0, void 0, void 0, functi
         }
     });
 }); };
+// This is really ugly and probably breaks a lot of stuff! #TODO
+var window;
+var getCurrContext = function () {
+    var currBlockId = document.activeElement.id.slice(-9);
+    var currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId);
+    return currContext[0][0].string;
+};
+var getAllTags = function () {
+    var tagPages = window.roamAlphaAPI.q('[ :find (pull ?e [*]) :where [?e :node/title] ] ');
+    var tags = tagPages.map(function (page) { return page[0].title; });
+    return tags;
+};
+var semSearch = function (documents, query) { return __awaiter(void 0, void 0, void 0, function () {
+    var params, response, data;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                params = ({
+                    "documents": documents,
+                    "query": query
+                });
+                return [4 /*yield*/, request(params).then(function (r) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, r.json()];
+                            case 1: return [2 /*return*/, _a.sent()];
+                        }
+                    }); }); })];
+            case 1:
+                response = _a.sent();
+                data = response.data;
+                return [2 /*return*/, data];
+        }
+    });
+}); };
+var complete = function (prompt) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/];
+    });
+}); };
+var formatTag = function (s) {
+    var tag = / /.test(s) ? "[[" + s + "]]" : "#" + s;
+    return tag;
+};
 // Roam integration
 var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
     var prompt_1, q;
@@ -94,5 +137,26 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
         return [2 /*return*/];
     });
 }); };
+var autoTagListener = function (e) { return __awaiter(void 0, void 0, void 0, function () {
+    var tags_1, context, data, sortedTags, topTags, tagString;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                if (!(e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA")) return [3 /*break*/, 2];
+                tags_1 = getAllTags();
+                context = getCurrContext();
+                return [4 /*yield*/, semSearch(tags_1, context)];
+            case 1:
+                data = _a.sent();
+                sortedTags = data.sort(function (a, b) { return a.score - b.score; });
+                topTags = sortedTags.slice(-3).map(function (obj) { return tags_1[obj.document]; });
+                tagString = topTags.map(function (tag) { return formatTag(tag); }).join(" ");
+                user_event_1.default.type(e.target, tagString);
+                _a.label = 2;
+            case 2: return [2 /*return*/];
+        }
+    });
+}); };
 document.addEventListener("keydown", keydownEventListener);
+document.addEventListener("autoTag", autoTagListener);
 //# sourceMappingURL=index.js.map

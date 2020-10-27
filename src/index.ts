@@ -23,22 +23,77 @@ const request = async query => {
   return response
 }
 
+// This is really ugly and probably breaks a lot of stuff! #TODO
+let window: any
+
+const getCurrContext = () => {
+  const currBlockId = document.activeElement.id.slice(-9)
+  const currContext = window.roamAlphaAPI.q('[:find (pull ?a [*]) :in $ ?id :where [?a :block/uid ?id]]', currBlockId)
+  return currContext[0][0].string
+}
+
+const getAllTags = () => {
+  const tagPages = window.roamAlphaAPI.q('[ :find (pull ?e [*]) :where [?e :node/title] ] ')
+  const tags = tagPages.map( page => page[0].title)
+  return tags
+}
+
+const semSearch = async (documents, query) => {
+  const params = ({
+    "documents": documents,
+    "query": query
+  })
+
+  const response = await request(params).then( async r =>
+      await r.json())
+
+  const data = response.data
+
+  return data
+}
+
+const complete = async (prompt) => {
+
+}
+
+const formatTag = s => {
+  const tag = / /.test(s) ? "[["+s+"]]" : "#"+s
+  return tag
+}
+
 // Roam integration
 const keydownEventListener = async (e: KeyboardEvent) => {
-    if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+  if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
 
-      const prompt = (<HTMLTextAreaElement>document.activeElement).value
+    const prompt = (<HTMLTextAreaElement>document.activeElement).value
 
-      const q = ({
-        "prompt": prompt,
-        "max_tokens": 50
-      })
+    const q = ({
+      "prompt": prompt,
+      "max_tokens": 50
+    })
 
-      request(q).then( async r => userEvent.type(
-        e.target as HTMLTextAreaElement,
-        await r.json().then( async s =>  await s.choices[0].text ))
-      )
-    }
-  };
+    request(q).then( async r => userEvent.type(
+      e.target as HTMLTextAreaElement,
+      await r.json().then( async s =>  await s.choices[0].text ))
+    )
+  }
+};
 
-  document.addEventListener("keydown", keydownEventListener);
+const autoTagListener = async (e: KeyboardEvent) => {
+  if (e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+
+    const tags:string[] = getAllTags()
+    const context:string = getCurrContext()
+    const data = await semSearch(tags, context)
+    const sortedTags = data.sort( (a, b) => a.score - b.score )
+    const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
+    const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
+    userEvent.type(
+      e.target as HTMLTextAreaElement,
+      tagString
+    )
+  }
+};
+
+document.addEventListener("keydown", keydownEventListener);
+document.addEventListener("autoTag", autoTagListener);
