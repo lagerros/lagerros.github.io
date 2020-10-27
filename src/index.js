@@ -45,8 +45,12 @@ const semSearch = async (documents, query) => {
     "query": query
   })
 
-  const response = await request(params).then( async r =>
+  const r = request(params).then( async r =>
       await r.json())
+
+    const response = await r
+
+
 
   const data = response.data
 
