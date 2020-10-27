@@ -88,16 +88,16 @@ const autoTagListener = async (e) => {
 
     const tags = getAllTags()
     console.log(tags)
-    // const context:string = getCurrContext()
-    // const data = await semSearch(tags, context)
-    // console.log(await data)
-    // const sortedTags = data.sort( (a, b) => a.score - b.score )
-    // const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
-    // const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
-    // userEvent.type(
-    //   e.target as HTMLTextAreaElement,
-    //   tagString
-    // )
+    const context = getCurrContext()
+    const data = await semSearch(tags, context)
+    console.log(await data)
+    const sortedTags = data.sort( (a, b) => a.score - b.score )
+    const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
+    const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
+    userEvent.type(
+      e.target,
+      tagString
+    )
   }
 };
 
