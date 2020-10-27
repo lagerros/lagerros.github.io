@@ -82,6 +82,8 @@ const keydownEventListener = async (e: KeyboardEvent) => {
 const autoTagListener = async (e: KeyboardEvent) => {
   if (e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
 
+    console.log("um is this even working?")
+
     const tags:string[] = getAllTags()
     const context:string = getCurrContext()
     const data = await semSearch(tags, context)
