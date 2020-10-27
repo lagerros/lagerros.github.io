@@ -144,7 +144,7 @@ var autoTagListener = function (e) { return __awaiter(void 0, void 0, void 0, fu
         switch (_c.label) {
             case 0:
                 if (!(e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA")) return [3 /*break*/, 3];
-                console.log("um is this even working?");
+                console.log("update!!");
                 tags_1 = getAllTags();
                 console.log(tags_1);
                 context = getCurrContext();

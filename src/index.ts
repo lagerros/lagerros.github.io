@@ -33,7 +33,7 @@ const getCurrContext = () => {
 }
 
 const getAllTags = () => {
-  const tagPages = window.roamAlphaAPI.q('[ :find (pull ?e [*]) :where [?e :node/title] ] ')
+  const tagPages = (<Window>window).roamAlphaAPI.q('[ :find (pull ?e [*]) :where [?e :node/title] ] ')
   const tags = tagPages.map( page => page[0].title)
   return tags
 }
@@ -83,7 +83,7 @@ const keydownEventListener = async (e: KeyboardEvent) => {
 const autoTagListener = async (e: KeyboardEvent) => {
   if (e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
 
-    console.log("um is this even working?")
+    console.log("update!!")
 
     const tags:string[] = getAllTags()
     console.log(tags)
