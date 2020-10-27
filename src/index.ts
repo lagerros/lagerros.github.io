@@ -64,6 +64,7 @@ const formatTag = s => {
 // Roam integration
 const keydownEventListener = async (e: KeyboardEvent) => {
   if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+    console.log("that stuff from in here?")
 
     const prompt = (<HTMLTextAreaElement>document.activeElement).value
 

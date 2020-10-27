@@ -111,6 +111,7 @@ var keydownEventListener = function (e) { return __awaiter(void 0, void 0, void 
     var prompt_1, q;
     return __generator(this, function (_a) {
         if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
+            console.log("that stuff from in here?");
             prompt_1 = document.activeElement.value;
             q = ({
                 "prompt": prompt_1,
