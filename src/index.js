@@ -74,7 +74,7 @@ const formatTag = s => {
 }
 
 const filterRoamJunk = string => {
-    let outString = string.slice(0, -1)
+    let outString = string.slice(0)
     outString.replace(/\[\[.+\]\]/, "") // Clear square brackets
     .replace(/\{\{.+\}\}/, "") // Clear curly brackets
     .replace(/\(\(.+\)\)/, "") // Clear double parentheses
@@ -94,7 +94,7 @@ const objToString = (obj,prefix="") => {
    prefix += "*"
 
     if (obj.children) {
-        obj.children.forEach( child => string += prefix+objToString(child, prefix) )
+        obj.children.forEach( child => string += prefix+" "+objToString(child, prefix) )
     }
   //  console.log("made it thru with", string)
 
