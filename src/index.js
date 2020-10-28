@@ -5,8 +5,8 @@ const config = getConfigFromPage("roam/js/GPT3-token");
 const auth = config["API"]?.trim();
 
 // GPT3 integration
-const completion_url = "https://api.openai.com/v1/engines/davinci/completions"
-const search_url = "https://api.openai.com/v1/engines/davinci/search"
+const completion_url = "https://api.openai.com/v1/engines/ada/completions"
+const search_url = "https://api.openai.com/v1/engines/ada/search"
 
 
 const HEADERS = {
@@ -58,10 +58,7 @@ const semSearch = async (documents, query) => {
         await r.json() )
 
     const response = await r
-    console.log(await response)
-
     const data = response.data
-
     return data
 }
 
@@ -74,6 +71,7 @@ const formatTag = s => {
 }
 
 const filterRoamJunk = string => {
+    // TODO: debug this, not working
     let outString = string.slice(0)
     outString.replace(/\[\[.+\]\]/, "") // Clear square brackets
     .replace(/\{\{.+\}\}/, "") // Clear curly brackets
@@ -128,10 +126,8 @@ const filterTags = tag => {
 // Roam integration
 const keydownEventListener = async (e) => {
   if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
-    console.log("that stuff from in here?")
 
     const prompt = document.activeElement.value
-
     const q = ({
       "prompt": prompt,
       "max_tokens": 50
@@ -151,8 +147,8 @@ const autoTagListener = async (e) => {
     console.log("tags", tags)
     const context = await getCurrContext()
     console.log("context", context)
-    const data = await semSearch(tags, context)
-    console.log(await data)
+    const response = await semSearch(tags, context)
+    const data = [...response]
     const sortedTags = data.sort( (a, b) => a.score - b.score )
     const topTags = sortedTags.slice(-3).map( obj => tags[obj.document])
     const tagString = topTags.map( tag => formatTag(tag) ).join(" ")
