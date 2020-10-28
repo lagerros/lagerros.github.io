@@ -93,12 +93,9 @@ const objToString = obj => {
     console.log(string)
 
     if (obj.children) {
-        obj.children.forEach( child =>
-            {console.log(child)
-                string += "* "+objToString(child)}
-        )
+        obj.children.forEach( child => string += "* "+objToString(child) )
     }
-    console.log("made it thru")
+    console.log("made it thru with", string)
 
     return(string)
 }
@@ -108,7 +105,7 @@ const isStubPage = tag => {
     console.log(objToString(data))
     const textLength = 0
     // Check if page has no content
-    const hasChildren = children in data
+    const hasChildren = (data.children != undefined)
     if (hasChildren) {
 
     }
