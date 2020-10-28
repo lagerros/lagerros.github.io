@@ -83,21 +83,12 @@ const filterRoamJunk = string => {
 }
 
 const objToString = (obj,prefix="") => {
-    console.log("obj", obj)
-
-    /** Turns a given roam object into a single string representation **/
+    /** Turns a given roam object into a markdown string representation **/
     let string = ""
     if (obj.title) { string += obj.title+"\n" }
-   // console.log(string)
     if (obj.string) { string += filterRoamJunk(obj.string)+"\n" }
-   // console.log(string)
-   prefix += "*"
-
-    if (obj.children) {
-        obj.children.forEach( child => string += prefix+" "+objToString(child, prefix) )
-    }
-  //  console.log("made it thru with", string)
-
+    prefix += "*"
+    if (obj.children) { obj.children.forEach( child => string += prefix+" "+objToString(child, prefix) ) }
     return(string)
 }
 
@@ -108,15 +99,25 @@ const isStubPage = tag => {
     // Check if page has no content
     const hasChildren = (data.children != undefined)
     if (hasChildren) {
-
+        textLength += objToString.length
     }
     // Check if tag has been used less than 3 times
+
+    return !( hasChildren || textLength < 50 ||  )
 }
+
 
 const getPageData = pageName => {
 	const queryString = '[ :find (pull ?e [ :node/title :block/string :block/children :block/uid {:block/children ...} ]) :in $ ?name :where [?e :node/title ?name]]'
 	return window.roamAlphaAPI.q(queryString, pageName)
 }
+
+const getReferences = pageName => {
+    const queryString = '[ :find (pull ?e [:node/title {:block/_refs [:block/string] }]) :in $ ?name :where [?e :node/title ?name]]'
+    return window.roamAlphaAPI.q(queryString)
+}
+
+console.log( getReferences("Zoo") )
 
 isStubPage("Zoo")
 isStubPage("TODO")
