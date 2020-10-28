@@ -75,17 +75,30 @@ const formatTag = s => {
 }
 
 const isStubPage = tag => {
+    const data = getPageData(tag)[0][0]
+    console.log("data", data)
+    const textLength = 0
     // Check if page has no content
+    const hasChildren = children in data
+    if (hasChildren) {
+
+    }
+    console.log("hasChildren", hasChildren)
     // Check if tag has been used less than 3 times
 }
 
 const getPageData = pageName => {
-	const queryString = '[ :find (pull ?e [ :node/title :block/string :block/children {:block/children ...} ]) :in $ ?name :where [?e :node/title ?name]]'
+	const queryString = '[ :find (pull ?e [ :node/title :block/string :block/children :block/uid {:block/children ...} ]) :in $ ?name :where [?e :node/title ?name]]'
 	return window.roamAlphaAPI.q(queryString, pageName)
 }
 
-console.log(getPageData("Zoo"))
+const objToString = obj => {
+    /** Turns a given roam object into a single string representation **/
 
+
+}
+
+console.log(getPageData("Zoo"))
 
 const filterTags = tag => {
 
