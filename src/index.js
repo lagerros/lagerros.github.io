@@ -102,8 +102,9 @@ const isStubPage = tag => {
         textLength += objToString.length
     }
     // Check if tag has been used less than 3 times
+    const refs = getReferences(tag)[0][0]["_refs"]
 
-    return !( hasChildren || textLength < 50 )
+    return !( hasChildren || textLength >= 50 || refs.length >= 3)
 }
 
 
@@ -161,7 +162,7 @@ const autoTagListener = async (e) => {
 
     console.log("update!!")
 
-    const tags = getAllTags().slice(0,200)
+    const tags = getAllTags().filter( tag => !isStubPage(tag) )
     console.log("tags", tags)
     const context = await getCurrContext()
     console.log("context", context)
