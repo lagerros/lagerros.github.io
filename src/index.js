@@ -84,7 +84,7 @@ const filterRoamJunk = string => {
 
 const objToString = obj => {
     const data = obj[0]
-    console.log(data)
+    console.log("obj", obj, "data", data)
 
     /** Turns a given roam object into a single string representation **/
     let string = ""
@@ -104,7 +104,6 @@ const objToString = obj => {
 
 const isStubPage = tag => {
     const data = getPageData(tag)[0]
-    console.log("data", data)
     console.log(objToString(data))
     const textLength = 0
     // Check if page has no content
