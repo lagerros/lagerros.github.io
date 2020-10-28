@@ -83,18 +83,17 @@ const filterRoamJunk = string => {
 }
 
 const objToString = obj => {
-    const data = obj[0]
     console.log("obj", obj, "data", data)
 
     /** Turns a given roam object into a single string representation **/
     let string = ""
-    if (data.title != undefined) { string += data.title }
+    if (obj.title != undefined) { string += obj.title }
     console.log(string)
-    if (data.string != undefined) { string += filterRoamJunk(data.string) }
+    if (obj.string != undefined) { string += filterRoamJunk(obj.string) }
     console.log(string)
 
-    if (data.children != undefined) {
-        data.children.forEach( child =>
+    if (obj.children != undefined) {
+        obj.children.forEach( child =>
             string += objToString(child)
         )
     }
@@ -103,7 +102,7 @@ const objToString = obj => {
 }
 
 const isStubPage = tag => {
-    const data = getPageData(tag)[0]
+    const data = getPageData(tag)[0][0]
     console.log(objToString(data))
     const textLength = 0
     // Check if page has no content
