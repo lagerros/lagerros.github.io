@@ -88,14 +88,14 @@ const objToString = obj => {
     /** Turns a given roam object into a single string representation **/
     let string = ""
     if (obj.title) { string += obj.title+"\n" }
-    console.log(string)
+   // console.log(string)
     if (obj.string) { string += filterRoamJunk(obj.string)+"\n" }
-    console.log(string)
+   // console.log(string)
 
     if (obj.children) {
         obj.children.forEach( child => string += "* "+objToString(child) )
     }
-    console.log("made it thru with", string)
+  //  console.log("made it thru with", string)
 
     return(string)
 }
