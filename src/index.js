@@ -92,7 +92,7 @@ const getPageData = pageName => {
 	return window.roamAlphaAPI.q(queryString, pageName)
 }
 
-isStubgPage(zoo)
+isStubPage(zoo)
 
 const objToString = obj => {
     /** Turns a given roam object into a single string representation **/
