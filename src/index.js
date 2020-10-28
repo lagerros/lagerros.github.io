@@ -98,7 +98,7 @@ const autoTagListener = async (e) => {
 
     console.log("update!!")
 
-    const tags = getAllTags()
+    const tags = getAllTags().slice(0,200)
     console.log("tags", tags)
     const context = await getCurrContext()
     console.log("context", context)
