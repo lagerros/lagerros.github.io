@@ -83,7 +83,7 @@ const filterRoamJunk = string => {
 }
 
 const objToString = obj => {
-    console.log("obj", obj, "data", data)
+    console.log("obj", obj)
 
     /** Turns a given roam object into a single string representation **/
     let string = ""
