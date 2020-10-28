@@ -80,8 +80,8 @@ const isStubPage = tag => {
 }
 
 const getPageData = pageName => {
-	const queryString = '[ :find (pull ?e [ :node/title :block/string :block/children {:block/children ...} ]) :where [?e :node/title]]'
-	return window.roamAlphaAPI.q(queryString)
+	const queryString = '[ :find (pull ?e [ :node/title :block/string :block/children {:block/children ...} ]) :in $ ?name :where [?e :node/title ?name]]'
+	return window.roamAlphaAPI.q(queryString, pageName)
 }
 
 console.log(getPageData("Zoo"))
