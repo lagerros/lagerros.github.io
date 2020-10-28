@@ -108,7 +108,7 @@ const isStubPage = tag => {
     console.log(objToString(data))
     const textLength = 0
     // Check if page has no content
-    const hasChildren = children in data[0]
+    const hasChildren = children in data
     if (hasChildren) {
 
     }
