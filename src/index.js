@@ -89,7 +89,7 @@ const objToString = obj => {
     let string = ""
     if (obj.title) { string += obj.title+"\n" }
    // console.log(string)
-    if (obj.string) { string += filterRoamJunk(obj.string)+"\n" }
+    if (obj.string) { string += "* "+filterRoamJunk(obj.string)+"\n" }
    // console.log(string)
 
     if (obj.children) {
@@ -109,7 +109,6 @@ const isStubPage = tag => {
     if (hasChildren) {
 
     }
-    console.log("hasChildren", hasChildren)
     // Check if tag has been used less than 3 times
 }
 
