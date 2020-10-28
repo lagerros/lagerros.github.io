@@ -97,6 +97,7 @@ const objToString = obj => {
             string += "* "+objToString(child)
         )
     }
+    console.log("made it thru")
 
     return(string)
 }
