@@ -74,13 +74,40 @@ const formatTag = s => {
   return tag
 }
 
+const filterRoamJunk = string => {
+    const outString = string.slice(0, -1)
+    outString.replace(/\[\[.+\]\]/, "") // Clear square brackets
+    .replace(/\{\{.+\}\}/, "") // Clear curly brackets
+    .replace(/\(\(.+\)\)/, "") // Clear double parentheses
+    .replace(/#.+\s/, "") // Clear hashtags
+    return outString
+}
+
+const objToString = obj => {
+    const data = obj[0]
+    /** Turns a given roam object into a single string representation **/
+    const string = ""
+    if (data.title != undefined) { string += data.title }
+    console.log(string)
+    if (data.string != undefined) { string += filterRoamJunk(data.string) }
+    console.log(string)
+
+    if (data.children != undefined) {
+        data.children.forEach( child =>
+            string += objToString(child)
+        )
+    }
+
+    return(string)
+}
+
 const isStubPage = tag => {
-    const data = getPageData(tag)[0][0]
+    const data = getPageData(tag)[0]
     console.log("data", data)
     console.log(objToString(data))
     const textLength = 0
     // Check if page has no content
-    const hasChildren = children in data
+    const hasChildren = children in data[0]
     if (hasChildren) {
 
     }
@@ -95,21 +122,6 @@ const getPageData = pageName => {
 
 isStubPage("Zoo")
 isStubPage("TODO")
-
-const objToString = obj => {
-    /** Turns a given roam object into a single string representation **/
-    const string = ""
-    if (obj.title != undefined) { string += obj.title }
-
-    if (a.children != undefined) {
-        a.children.forEach( child =>
-            string += objToString(child)
-        )
-    }
-
-    return(string)
-
-}
 
 console.log(getPageData("Zoo"))
 
