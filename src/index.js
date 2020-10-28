@@ -77,6 +77,7 @@ const formatTag = s => {
 const isStubPage = tag => {
     const data = getPageData(tag)[0][0]
     console.log("data", data)
+    console.log(objToString(data))
     const textLength = 0
     // Check if page has no content
     const hasChildren = children in data
@@ -93,10 +94,20 @@ const getPageData = pageName => {
 }
 
 isStubPage("Zoo")
+isStubPage("TODO")
 
 const objToString = obj => {
     /** Turns a given roam object into a single string representation **/
+    const string = ""
+    if (obj.title != undefined) { string += obj.title }
 
+    if (a.children != undefined) {
+        a.children.forEach( child =>
+            string += objToString(child)
+        )
+    }
+
+    return(string)
 
 }
 
