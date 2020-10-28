@@ -114,7 +114,7 @@ const getPageData = pageName => {
 
 const getReferences = pageName => {
     const queryString = '[ :find (pull ?e [:node/title {:block/_refs [:block/string] }]) :in $ ?name :where [?e :node/title ?name]]'
-    return window.roamAlphaAPI.q(queryString)
+    return window.roamAlphaAPI.q(queryString, pageName)
 }
 
 console.log( getReferences("Zoo") )
