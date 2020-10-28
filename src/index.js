@@ -95,7 +95,7 @@ const objToString = (obj,prefix="") => {
 const isStubPage = tag => {
     const data = getPageData(tag)[0][0]
     console.log("Here's the final string", objToString(data))
-    const textLength = 0
+    let textLength = 0
     // Check if page has no content
     const hasChildren = (data.children != undefined)
     if (hasChildren) {
@@ -128,11 +128,8 @@ console.log(getPageData("Zoo"))
 const filterTags = tag => {
 
     if (
-        // Filter out dates
-        /, 202\d/.test(tag) ||
-        // Filter tags
+        /, 202\d/.test(tag) || // Filter out dates
         isStubPage(tag)
-
     ) { return false}
 
     else { return true }
@@ -162,7 +159,7 @@ const autoTagListener = async (e) => {
 
     console.log("update!!")
 
-    const tags = getAllTags().filter( tag => !isStubPage(tag) )
+    const tags = getAllTags().filter( filterTags )
     console.log("tags", tags)
     const context = await getCurrContext()
     console.log("context", context)
