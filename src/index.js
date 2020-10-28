@@ -94,9 +94,9 @@ const objToString = (obj,prefix="") => {
 
 const isStubPage = tag => {
     const data = getPageData(tag)[0][0]
-    console.log("Here's the final string", objToString(data))
-    let textLength = 0
+
     // Check if page has no content
+    let textLength = 0
     const hasChildren = (data.children != undefined)
     if (hasChildren) {
         textLength += objToString.length
@@ -106,7 +106,6 @@ const isStubPage = tag => {
 
     return !( hasChildren || textLength >= 50 || refs.length >= 3)
 }
-
 
 const getPageData = pageName => {
 	const queryString = '[ :find (pull ?e [ :node/title :block/string :block/children :block/uid {:block/children ...} ]) :in $ ?name :where [?e :node/title ?name]]'
@@ -118,20 +117,11 @@ const getReferences = pageName => {
     return window.roamAlphaAPI.q(queryString, pageName)
 }
 
-console.log( getReferences("Zoo") )
-
-isStubPage("Zoo")
-isStubPage("TODO")
-
-console.log(getPageData("Zoo"))
-
 const filterTags = tag => {
-
     if (
         /, 202\d/.test(tag) || // Filter out dates
         isStubPage(tag)
     ) { return false}
-
     else { return true }
 }
 
@@ -156,8 +146,6 @@ const keydownEventListener = async (e) => {
 
 const autoTagListener = async (e) => {
   if (e.shiftKey && e.ctrlKey && e.key === "T" && document.activeElement.tagName === "TEXTAREA") {
-
-    console.log("update!!")
 
     const tags = getAllTags().filter( filterTags )
     console.log("tags", tags)
