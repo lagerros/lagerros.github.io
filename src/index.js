@@ -66,7 +66,6 @@ const semSearch = async (documents, query) => {
 }
 
 const complete = async (prompt) => {
-
 }
 
 const formatTag = s => {
@@ -75,7 +74,7 @@ const formatTag = s => {
 }
 
 const filterRoamJunk = string => {
-    const outString = string.slice(0, -1)
+    let outString = string.slice(0, -1)
     outString.replace(/\[\[.+\]\]/, "") // Clear square brackets
     .replace(/\{\{.+\}\}/, "") // Clear curly brackets
     .replace(/\(\(.+\)\)/, "") // Clear double parentheses
@@ -86,7 +85,7 @@ const filterRoamJunk = string => {
 const objToString = obj => {
     const data = obj[0]
     /** Turns a given roam object into a single string representation **/
-    const string = ""
+    let string = ""
     if (data.title != undefined) { string += data.title }
     console.log(string)
     if (data.string != undefined) { string += filterRoamJunk(data.string) }
