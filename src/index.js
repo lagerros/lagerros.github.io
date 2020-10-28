@@ -94,7 +94,8 @@ const objToString = obj => {
 
     if (obj.children) {
         obj.children.forEach( child =>
-            string += "* "+objToString(child)
+            {console.log(child)
+                string += "* "+objToString(child)}
         )
     }
     console.log("made it thru")
