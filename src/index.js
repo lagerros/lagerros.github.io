@@ -103,7 +103,7 @@ const isStubPage = tag => {
     }
     // Check if tag has been used less than 3 times
 
-    return !( hasChildren || textLength < 50 ||  )
+    return !( hasChildren || textLength < 50 )
 }
 
 
