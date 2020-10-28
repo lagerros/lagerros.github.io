@@ -82,18 +82,19 @@ const filterRoamJunk = string => {
     return outString
 }
 
-const objToString = obj => {
+const objToString = (obj,prefix="") => {
     console.log("obj", obj)
 
     /** Turns a given roam object into a single string representation **/
     let string = ""
     if (obj.title) { string += obj.title+"\n" }
    // console.log(string)
-    if (obj.string) { string += "* "+filterRoamJunk(obj.string)+"\n" }
+    if (obj.string) { string += filterRoamJunk(obj.string)+"\n" }
    // console.log(string)
+   prefix += "*"
 
     if (obj.children) {
-        obj.children.forEach( child => string += "* "+objToString(child) )
+        obj.children.forEach( child => string += prefix+objToString(child, prefix) )
     }
   //  console.log("made it thru with", string)
 
@@ -102,7 +103,7 @@ const objToString = obj => {
 
 const isStubPage = tag => {
     const data = getPageData(tag)[0][0]
-    console.log(objToString(data))
+    console.log("Here's the final string", objToString(data))
     const textLength = 0
     // Check if page has no content
     const hasChildren = (data.children != undefined)
