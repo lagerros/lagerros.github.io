@@ -74,6 +74,32 @@ const formatTag = s => {
   return tag
 }
 
+const isStubPage = tag => {
+    // Check if page has no content
+    // Check if tag has been used less than 3 times
+}
+
+const getPageData = pageName => {
+	const queryString = '[ :find (pull ?e [ :node/title :block/string :block/children {:block/children ...} ]) :where [?e :node/title]]'
+	return window.roamAlphaAPI.q(queryString)
+}
+
+console.log(getPageData("Zoo"))
+
+
+const filterTags = tag => {
+
+    if (
+        // Filter out dates
+        /, 202\d/.test(tag) ||
+        // Filter tags
+        isStubPage(tag)
+
+    ) { return false}
+
+    else { return true }
+}
+
 // Roam integration
 const keydownEventListener = async (e) => {
   if (e.key === "G" && e.shiftKey && e.ctrlKey && document.activeElement.tagName === "TEXTAREA") {
